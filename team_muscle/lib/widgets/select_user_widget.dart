@@ -29,6 +29,7 @@ class SelectUserWidget extends StatelessWidget {
                             icon: const Icon(Icons.how_to_reg),
                             onPressed: () {
                               globals.userIndex = usersSnapshot.data![index].id;
+                              Navigator.pop(context);
                             },
                           ),
                         ),
