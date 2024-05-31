@@ -1,6 +1,3 @@
-import 'package:sqflite/sqflite.dart';
-import 'package:team_muscle/globals.dart' as globals;
-
 class UserModel {
   final int id;
   final String name;

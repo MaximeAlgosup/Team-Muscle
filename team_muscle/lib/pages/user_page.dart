@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Widgets
 import 'package:team_muscle/widgets/navbar_widget.dart';
 import 'package:team_muscle/widgets/new_user_widget.dart';
+import 'package:team_muscle/widgets/select_user_widget.dart';
 
 // Models
 import 'package:team_muscle/models/user_model.dart';
@@ -15,7 +16,12 @@ class UserPage extends StatelessWidget {
 
   void printUsers() async {
     final List<UserModel> usersList = await users();
-    debugPrint("number of users: ${usersList.length}");
+    debugPrint("number of users: ${usersList.toString()}");
+  }
+
+  Future<List<UserModel>> getUsers() async {
+    final List<UserModel> usersList = await users();
+    return usersList;
   }
 
   @override
@@ -27,11 +33,7 @@ class UserPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                NewUserWidget(),
-                ElevatedButton(
-                  onPressed: printUsers,
-                  child: const Text('Print Users'),
-                ),
+                SelectUserWidget(usersList: getUsers()),
               ],
             ),
           ),
