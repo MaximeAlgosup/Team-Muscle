@@ -39,3 +39,12 @@ Future<List<UserModel>> users() async {
       UserModel(id: id, name: name, birthYear: birthYear, height: height, weight: weight),
   ];
 }
+
+Future<void> deleteUser(int id) async {
+  final db = await globals.database;
+  await db.delete(
+    'users',
+    where: 'id = ?',
+    whereArgs: [id],
+  );
+}
