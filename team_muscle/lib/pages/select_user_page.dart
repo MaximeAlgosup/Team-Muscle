@@ -43,7 +43,7 @@ class SelectUserPage extends StatelessWidget {
         preferredSize: const Size.fromHeight(40.0),
         child: BackAppBarWidget(
           onTape: () {
-            Navigator.pop(context);
+            context.goNamed("user");
           },
         ),
       ),
@@ -60,7 +60,7 @@ class SelectUserPage extends StatelessWidget {
                   label: 'Add User',
                   icon: Icons.add,
                   onPressed: () {
-                    context.pushNamed('add_user');
+                    context.goNamed('add_user');
                   },
                 ),
               ],

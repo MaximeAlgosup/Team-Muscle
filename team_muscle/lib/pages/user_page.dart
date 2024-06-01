@@ -27,7 +27,6 @@ class _UserPageState extends State<UserPage>
   bool _isUser = false;
 
   Future<void> updateIsUser() async {
-      print("Updating isUser");
       final List<UserModel> usersList = await users();
       if (globals.userIndex != null && usersList.isNotEmpty) {
         setState(() {
@@ -75,9 +74,6 @@ class _UserPageState extends State<UserPage>
   @override
   void initState() {
     super.initState();
-    Timer.periodic(const Duration(seconds: 10), (timer) async {
-      await updateIsUser();
-    });
     _controller = AnimationController(vsync: this);
 
     _controller.addListener(() {
@@ -85,6 +81,7 @@ class _UserPageState extends State<UserPage>
         _dragAlignment = _animation.value;
       });
     });
+
   }
 
   @override
@@ -114,6 +111,7 @@ class _UserPageState extends State<UserPage>
             print("Pad released!");
             updateIsUser();
             _runAnimation(details.velocity.pixelsPerSecond, size);
+            context.goNamed('profile');
           },
           child: Align(
             alignment: _dragAlignment,
@@ -130,7 +128,7 @@ class _UserPageState extends State<UserPage>
                       label: 'Log In',
                       icon: Icons.login,
                       onPressed: () {
-                        context.pushNamed('select_user');
+                        context.goNamed('select_user');
                       },
                     ),
                   ),
@@ -139,8 +137,7 @@ class _UserPageState extends State<UserPage>
                           child: SimpleButtonWidget(
                           label: "See my profile",
                           onPressed: () {
-                            // context.goNamed('profile');
-                            print("User index: ${globals.userIndex}");
+                            context.goNamed('profile');
                           },
                         ))
                       : const Text(""),

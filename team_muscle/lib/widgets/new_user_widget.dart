@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 // Widgets
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
@@ -40,7 +41,7 @@ class NewUserWidget extends StatelessWidget {
           label: 'Save User',
           onPressed: () {
             controller.saveUser();
-            Navigator.pop(context);
+            context.goNamed("select_user");
           },
         ),
       ],

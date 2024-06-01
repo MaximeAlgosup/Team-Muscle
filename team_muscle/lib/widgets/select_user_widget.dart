@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:team_muscle/globals.dart' as globals;
+import 'package:go_router/go_router.dart';
 
 // Models
 import 'package:team_muscle/models/user_model.dart';
@@ -61,7 +62,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                       icon: const Icon(Icons.how_to_reg),
                       onPressed: () {
                         globals.userIndex = usersSnapshot.data![index].id;
-                        Navigator.pop(context);
+                        context.goNamed("user");
                       },
                     ),
                   ),

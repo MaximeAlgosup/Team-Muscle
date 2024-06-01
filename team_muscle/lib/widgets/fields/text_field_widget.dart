@@ -7,12 +7,14 @@ class TextFieldWidget extends StatelessWidget {
       required this.controller,
       this.titleFontSize = 20,
       this.hintFontSize = 15,
+      this.isEditable = true,
       super.key});
 
   final String label;
   final String hintText;
   final double titleFontSize;
   final double hintFontSize;
+  final bool isEditable;
   final TextEditingController controller;
 
   @override
@@ -38,6 +40,7 @@ class TextFieldWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: TextField(
+                  enabled: isEditable,
                   controller: controller,
                   decoration: InputDecoration(
                     filled: true,
@@ -55,6 +58,13 @@ class TextFieldWidget extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
                     enabledBorder: const OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Colors.black,
+                        width: 2.5,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    disabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
                         color: Colors.black,
                         width: 2.5,

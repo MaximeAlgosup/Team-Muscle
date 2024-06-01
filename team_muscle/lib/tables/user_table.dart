@@ -14,7 +14,24 @@ Future<void> insertUser(UserModel user) async {
   );
 }
 
-Future<void> updateUser(UserModel user) async {
+Future<UserModel> findUserById(int id) async {
+  final db = await globals.database;
+  final List<Map<String, Object?>> userMaps = await db.query(
+    'users',
+    where: 'id = ?',
+    whereArgs: [id],
+  );
+
+  return UserModel(
+    id: userMaps.first['id'] as int,
+    name: userMaps.first['name'] as String,
+    birthYear: userMaps.first['birthYear'] as int,
+    height: userMaps.first['height'] as double,
+    weight: userMaps.first['weight'] as double,
+  );
+}
+
+Future<void> updateUserRow(UserModel user) async {
   final db = await globals.database;
   await db.update(
     'users',
@@ -40,11 +57,11 @@ Future<List<UserModel>> users() async {
   ];
 }
 
-Future<void> deleteUser(int id) async {
+Future<void> deleteUserRow(String name, int year) async {
   final db = await globals.database;
   await db.delete(
     'users',
-    where: 'id = ?',
-    whereArgs: [id],
+    where: 'name = ? AND birthYear = ?',
+    whereArgs: [name, year],
   );
 }
