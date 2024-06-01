@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 // Widgets
 import 'package:team_muscle/widgets/new_user_widget.dart';
@@ -25,7 +26,10 @@ class AddUserPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: Colors.grey[600],
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(40.0),
         child: BackAppBarWidget(
@@ -34,15 +38,9 @@ class AddUserPage extends StatelessWidget {
           },
         ),
       ),
-      body: Container(
-        color: Colors.grey[600],
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              NewUserWidget(),
-            ],
-          ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: NewUserWidget(),
         ),
       ),
     );

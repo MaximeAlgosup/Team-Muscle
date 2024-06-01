@@ -55,7 +55,7 @@ class SelectUserPage extends StatelessWidget {
               children: [
                 (isUsers() == false) ?
                 const Text("No users found, please add a new user") :
-                SelectUserWidget(usersList: getUsers()),
+                const SelectUserWidget(),
                 IconButtonWidget(
                   label: 'Add User',
                   icon: Icons.add,

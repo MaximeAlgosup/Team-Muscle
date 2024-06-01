@@ -26,9 +26,11 @@ class UserController {
     weight.dispose();
   }
 
-  void saveUser() {
+  void saveUser() async{
+    // get users number
+    int usersNumber = await users().then((value) => value.length);
     final UserModel user = UserModel(
-      id: 0,
+      id: usersNumber + 1,
       name: name.text,
       birthYear: int.parse(age.text),
       height: double.parse(height.text),

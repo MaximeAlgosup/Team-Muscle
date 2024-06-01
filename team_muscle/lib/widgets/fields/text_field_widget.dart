@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget(
-      {required this.label, required this.hintText, required this.controller, super.key});
+      {required this.label,
+      required this.hintText,
+      required this.controller,
+      this.titleFontSize = 20,
+      this.hintFontSize = 15,
+      super.key});
 
   final String label;
   final String hintText;
+  final double titleFontSize;
+  final double hintFontSize;
   final TextEditingController controller;
 
   @override
@@ -16,14 +23,15 @@ class TextFieldWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(
+              Expanded(
+                  child: Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: titleFontSize,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              )),
             ],
           ),
           Row(
@@ -37,7 +45,7 @@ class TextFieldWidget extends StatelessWidget {
                     hintText: hintText,
                     hintStyle: TextStyle(
                       color: Colors.grey[600],
-                      fontSize: 15,
+                      fontSize: hintFontSize,
                     ),
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(

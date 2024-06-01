@@ -10,7 +10,7 @@ class BackAppBarWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: Container(
-        color: Colors.grey[800],
+        color: Colors.grey[600],
         alignment: Alignment.centerLeft,
         child: IconButton(
           icon: const Icon(Icons.arrow_back_ios),

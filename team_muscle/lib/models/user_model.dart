@@ -24,6 +24,6 @@ class UserModel {
 
   @override
   toString() {
-    return 'UserModel{name: $name, birthYear: $birthYear, height: $height, weight: $weight}';
+    return 'UserModel{id: $id, name: $name, birthYear: $birthYear, height: $height, weight: $weight}';
   }
 }

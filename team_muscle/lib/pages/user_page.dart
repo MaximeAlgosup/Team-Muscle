@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/physics.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_muscle/globals.dart' as globals;
 import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
@@ -20,22 +22,22 @@ class UserPage extends StatefulWidget {
   _UserPageState createState() => _UserPageState();
 }
 
-class _UserPageState extends State<UserPage> {
+class _UserPageState extends State<UserPage>
+    with SingleTickerProviderStateMixin {
   bool _isUser = false;
 
-  @override
-  void initState() {
-    super.initState();
-    updateIsUser();
-  }
-
   Future<void> updateIsUser() async {
-    final List<UserModel> usersList = await users();
-    if (usersList.isNotEmpty) {
-      setState(() {
-        _isUser = true;
-      });
-    }
+      print("Updating isUser");
+      final List<UserModel> usersList = await users();
+      if (globals.userIndex != null && usersList.isNotEmpty) {
+        setState(() {
+          _isUser = true;
+        });
+      } else {
+        setState(() {
+          _isUser = false;
+        });
+      }
   }
 
   Future<List<UserModel>> getUsers() async {
@@ -43,55 +45,110 @@ class _UserPageState extends State<UserPage> {
     return usersList;
   }
 
+  late AnimationController _controller;
+  Alignment _dragAlignment = Alignment.center;
+  late Animation<Alignment> _animation;
+
+  void _runAnimation(Offset pixelsPerSecond, Size size) {
+    _animation = _controller.drive(
+      AlignmentTween(
+        begin: _dragAlignment,
+        end: Alignment.center,
+      ),
+    );
+    final unitsPerSecondX = pixelsPerSecond.dx / size.width;
+    final unitsPerSecondY = pixelsPerSecond.dy / size.height;
+    final unitsPerSecond = Offset(unitsPerSecondX, unitsPerSecondY);
+    final unitVelocity = unitsPerSecond.distance;
+
+    const spring = SpringDescription(
+      mass: 30,
+      stiffness: 1,
+      damping: 1,
+    );
+
+    final simulation = SpringSimulation(spring, 0, 1, -unitVelocity);
+
+    _controller.animateWith(simulation);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(const Duration(seconds: 10), (timer) async {
+      await updateIsUser();
+    });
+    _controller = AnimationController(vsync: this);
+
+    _controller.addListener(() {
+      setState(() {
+        _dragAlignment = _animation.value;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
+        backgroundColor: Colors.grey[600],
         body: GestureDetector(
-          onVerticalDragDown: (details) {
-            print("Dragged Down");
-            updateIsUser();
+          onPanDown: (details) {
+            // _controller.stop();
           },
-          child: Container(
-            color: Colors.grey[600],
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
+          onPanUpdate: (details) {
+            setState(() {
+              _dragAlignment += Alignment(
+                details.delta.dx / (size.width / 2),
+                details.delta.dy / (size.height / 2),
+              );
+            });
+          },
+          onPanEnd: (details) {
+            print("Pad released!");
+            updateIsUser();
+            _runAnimation(details.velocity.pixelsPerSecond, size);
+          },
+          child: Align(
+            alignment: _dragAlignment,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              height: size.height * 0.6,
+              color: Colors.grey[600],
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: IconButtonWidget(
-                          label: 'Log In',
-                          icon: Icons.login,
-                          onPressed: () {
-                            context.pushNamed('select_user');
-                          },
-                        ),
-                      ),
-                    ],
+                  Center(
+                    child: IconButtonWidget(
+                      label: 'Log In',
+                      icon: Icons.login,
+                      onPressed: () {
+                        context.pushNamed('select_user');
+                      },
+                    ),
                   ),
-                  Row(
-                    children: [
-                      (_isUser == true)
-                          ? Expanded(
-                              child: SimpleButtonWidget(
-                              label: "See my profile",
-                              onPressed: () {
-                                // context.goNamed('profile');
-                                print("User index: ${globals.userIndex}");
-                              },
-                            ))
-                          : const Text(""),
-                    ],
-                  )
+                  (_isUser == true)
+                      ? Center(
+                          child: SimpleButtonWidget(
+                          label: "See my profile",
+                          onPressed: () {
+                            // context.goNamed('profile');
+                            print("User index: ${globals.userIndex}");
+                          },
+                        ))
+                      : const Text(""),
                 ],
               ),
             ),
           ),
         ),
-
         bottomNavigationBar: Container(
           color: Colors.grey[600],
           child: (_isUser == true)
