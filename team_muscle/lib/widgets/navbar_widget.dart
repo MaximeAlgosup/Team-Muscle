@@ -38,7 +38,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
       } else if(index == 1) {
         return;
       } else if(index == 2) {
-        context.goNamed('user');
+        context.goNamed('profile');
       }
     });
   }

@@ -34,14 +34,6 @@ class SelectUserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
-        child: BackAppBarWidget(
-          onTape: () {
-            context.goNamed("user");
-          },
-        ),
-      ),
         body: Container(
           color: Colors.grey[600],
           child: Padding(

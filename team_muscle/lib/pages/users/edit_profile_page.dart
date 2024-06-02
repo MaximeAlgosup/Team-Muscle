@@ -38,7 +38,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               Row(
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
                       context.goNamed("profile");
                     },
@@ -68,7 +68,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               SimpleButtonWidget(
                   label: 'Save data',
                   onPressed: () {
-                    controller.saveUser();
+                    controller.updateUser(globals.userIndex!);
                     context.goNamed("profile");
                   }
               ),
@@ -77,7 +77,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 isWarning: true,
                 onPressed: () {
                   controller.deleteUser();
-                  context.goNamed('user');
+                  context.goNamed('select_user');
                 },
               ),
             ],

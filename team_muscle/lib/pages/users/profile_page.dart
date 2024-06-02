@@ -41,13 +41,13 @@ class _ProfilePageState extends State<ProfilePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    icon: const Icon(Icons.logout),
+                    icon: const Icon(Icons.logout, color: Colors.black),
                     onPressed: () {
                       context.goNamed('select_user');
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.edit),
+                    icon: const Icon(Icons.edit, color: Colors.black),
                     onPressed: () {
                       context.goNamed('edit_profile');
                     },

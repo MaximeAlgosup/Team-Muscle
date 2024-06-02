@@ -1,31 +1,72 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Widgets
-import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
+// Controllers
+import 'package:team_muscle/controllers/exercise_controller.dart';
+
+// Tables
+import 'package:team_muscle/widgets/fields/text_area_widget.dart';
+import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 
 class ExercisePage extends StatelessWidget {
   const ExercisePage({
-    required this.exerciseId,
+    required this.exerciseController,
+    required this.ExerciseId,
     super.key});
 
-  final String exerciseId;
+  final ExerciseController exerciseController;
+  final String ExerciseId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
-        child: BackAppBarWidget(
-          onTape: () {
-            context.goNamed("exercise_list");
-          },
+      backgroundColor: Colors.grey[600],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
+                    onPressed: () {
+                      context.goNamed('exercise_list');
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.edit, color: Colors.black),
+                    onPressed: () {
+                      context.goNamed('edit_exercise', queryParameters: {'exerciseId': ExerciseId});
+                    },
+                  ),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    TextFieldWidget(
+                      label: 'Name',
+                      hintText: 'Enter the exercise name',
+                      controller: exerciseController.name,
+                      isEditable: false,
+                    ),
+                    TextAreaWidget(
+                      label: 'Description',
+                      hintText: 'Enter the exercise description',
+                      controller: exerciseController.description,
+                      isEditable: false,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-      body: Center(
-        child: Text('Exercise Page'),
       ),
     );
   }
 }
-

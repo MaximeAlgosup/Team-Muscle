@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Pages
-import 'package:team_muscle/pages/home_page.dart';
 // Users Pages
 import 'package:team_muscle/pages/users/user_page.dart';
 import 'package:team_muscle/pages/users/add_user_page.dart';
@@ -13,17 +11,14 @@ import 'package:team_muscle/pages/users/edit_profile_page.dart';
 import 'package:team_muscle/pages/exercises/exercise_list_page.dart';
 import 'package:team_muscle/pages/exercises/add_exercise_page.dart';
 import 'package:team_muscle/pages/exercises/exercise_page.dart';
+import 'package:team_muscle/pages/exercises/edit_exercise_page.dart';
+
+// Controllers
+import 'package:team_muscle/controllers/exercise_controller.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/pages/home_page.dart',
+  initialLocation: '/pages/users/user_page.dart',
   routes: [
-    GoRoute(
-      path: '/pages/home_page.dart',
-      name: 'home',
-      pageBuilder: (BuildContext context, GoRouterState state){
-        return const MaterialPage(child: HomePage());
-      }
-    ),
     GoRoute(
       path: '/pages/users/user_page.dart',
       name: 'user',
@@ -77,8 +72,26 @@ final GoRouter router = GoRouter(
       path: '/pages/exercises/exercise_page.dart',
       name: 'exercise',
       pageBuilder: (BuildContext context, GoRouterState state){
-        var  exerciseId = state.uri.queryParameters['exerciseId'] ?? '1';
-        return MaterialPage(child: ExercisePage(exerciseId: exerciseId));
+        var  exerciseId = state.uri.queryParameters['exerciseId'];
+        if (exerciseId == null) {
+          return const MaterialPage(child: ExerciseListPage());
+        }
+        ExerciseController exerciseController = ExerciseController();
+        exerciseController.setById(int.parse(exerciseId));
+        return MaterialPage(child: ExercisePage(exerciseController: exerciseController, ExerciseId: exerciseId));
+      }
+    ),
+    GoRoute(
+      path: '/pages/exercises/edit_exercise_page.dart',
+      name: 'edit_exercise',
+      pageBuilder: (BuildContext context, GoRouterState state){
+        var  exerciseId = state.uri.queryParameters['exerciseId'];
+        if (exerciseId == null) {
+          return const MaterialPage(child: ExerciseListPage());
+        }
+        ExerciseController exerciseController = ExerciseController();
+        exerciseController.setById(int.parse(exerciseId));
+        return MaterialPage(child: EditExercisePage(exerciseController: exerciseController, ExerciseId: exerciseId));
       }
     ),
   ],

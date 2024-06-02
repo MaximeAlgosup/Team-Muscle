@@ -8,6 +8,7 @@ import 'package:team_muscle/models/exercise_model.dart';
 import 'package:team_muscle/tables/exercise_table.dart';
 
 class ExerciseController {
+
   final TextEditingController name = TextEditingController();
   final TextEditingController description = TextEditingController();
 
@@ -49,6 +50,13 @@ class ExerciseController {
     // get exercises number
     int exercisesNumber = await exercises().then((value) => value.length);
     int exerciseId = exercisesNumber + 1;
+    final List<ExerciseModel> exercisesList = await exercises();
+    for(ExerciseModel exo in exercisesList) {
+      if(exo.name == name.text) {
+        updateExercise(exo.id);
+        return;
+      }
+    }
     ExerciseModel exercise = ExerciseModel(
       id: exerciseId,
       name: name.text,
