@@ -17,6 +17,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+
   final controller = UserController();
 
   @override
@@ -41,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   IconButton(
                     icon: const Icon(Icons.logout),
                     onPressed: () {
-                      context.goNamed('user');
+                      context.goNamed('select_user');
                     },
                   ),
                   IconButton(

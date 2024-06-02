@@ -82,6 +82,19 @@ class _UserPageState extends State<UserPage>
       });
     });
 
+    if(globals.userIndex != null){
+      updateIsUser();
+      setState(() {
+        _isUser = true;
+        context.goNamed('profile');
+      });
+    }
+    else{
+      setState(() {
+        _isUser = false;
+      });
+    }
+
   }
 
   @override

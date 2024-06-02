@@ -12,8 +12,7 @@ import 'package:team_muscle/pages/users/edit_profile_page.dart';
 // Exercises Pages
 import 'package:team_muscle/pages/exercises/exercise_list_page.dart';
 import 'package:team_muscle/pages/exercises/add_exercise_page.dart';
-
-
+import 'package:team_muscle/pages/exercises/exercise_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/pages/home_page.dart',
@@ -50,7 +49,7 @@ final GoRouter router = GoRouter(
       path: '/pages/users/profile_page.dart',
       name: 'profile',
       pageBuilder: (BuildContext context, GoRouterState state){
-        return const MaterialPage(child: ProfilePage());
+        return MaterialPage(child: ProfilePage());
       }
     ),
     GoRoute(
@@ -72,6 +71,14 @@ final GoRouter router = GoRouter(
       name: 'add_exercise',
       pageBuilder: (BuildContext context, GoRouterState state){
         return MaterialPage(child: AddExercisePage());
+      }
+    ),
+    GoRoute(
+      path: '/pages/exercises/exercise_page.dart',
+      name: 'exercise',
+      pageBuilder: (BuildContext context, GoRouterState state){
+        var  exerciseId = state.uri.queryParameters['exerciseId'] ?? '1';
+        return MaterialPage(child: ExercisePage(exerciseId: exerciseId));
       }
     ),
   ],

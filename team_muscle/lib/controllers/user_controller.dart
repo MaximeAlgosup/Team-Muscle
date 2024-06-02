@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:team_muscle/globals.dart' as globals;
 
 // Models
 import 'package:team_muscle/models/user_model.dart';
@@ -51,6 +52,7 @@ class UserController {
   }
 
   void deleteUser() async {
+    globals.userIndex = null;
     await deleteUserRow(name.text, int.parse(age.text));
   }
 

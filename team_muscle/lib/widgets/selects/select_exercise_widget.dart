@@ -34,7 +34,9 @@ class _SelectExerciseWidgetState extends State<SelectExerciseWidget> {
   @override
   void initState() {
     super.initState();
-    exercisesList = getExercises();
+    setState(() {
+      exercisesList = getExercises();
+    });
   }
 
   @override
@@ -60,7 +62,7 @@ class _SelectExerciseWidgetState extends State<SelectExerciseWidget> {
                         trailing: IconButton(
                           icon: const Icon(Icons.visibility),
                           onPressed: () {
-                            print("Selected exercise: ${exercisesSnapshot.data![index].name}");
+                            context.goNamed('exercise', queryParameters: {'exerciseId': "${exercisesSnapshot.data![index].id}"});
                           },
                         ),
                       ),
