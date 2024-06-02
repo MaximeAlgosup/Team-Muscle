@@ -10,7 +10,7 @@ import 'package:team_muscle/widgets/selects/select_exercise_widget.dart';
 import 'package:team_muscle/models/exercise_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/exercise_table.dart';
+import 'package:team_muscle/database/tables/exercise_table.dart';
 
 class ExerciseListPage extends StatelessWidget {
   const ExerciseListPage({super.key});

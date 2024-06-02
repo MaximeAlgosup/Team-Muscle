@@ -13,7 +13,7 @@ import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 import 'package:team_muscle/models/user_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/user_table.dart';
+import 'package:team_muscle/database/tables/user_table.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});

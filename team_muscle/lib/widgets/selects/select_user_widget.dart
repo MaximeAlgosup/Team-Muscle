@@ -7,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:team_muscle/models/user_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/user_table.dart';
+import 'package:team_muscle/database/tables/user_table.dart';
 
 class SelectUserWidget extends StatefulWidget {
   const SelectUserWidget({super.key});

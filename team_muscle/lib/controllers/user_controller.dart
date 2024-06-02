@@ -5,7 +5,7 @@ import 'package:team_muscle/globals.dart' as globals;
 import 'package:team_muscle/models/user_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/user_table.dart';
+import 'package:team_muscle/database/tables/user_table.dart';
 
 class UserController {
   final name = TextEditingController();

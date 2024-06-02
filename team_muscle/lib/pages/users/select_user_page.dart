@@ -4,13 +4,12 @@ import 'package:go_router/go_router.dart';
 // Widgets
 import 'package:team_muscle/widgets/selects/select_user_widget.dart';
 import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
-import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
 
 // Models
 import 'package:team_muscle/models/user_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/user_table.dart';
+import 'package:team_muscle/database/tables/user_table.dart';
 
 
 class SelectUserPage extends StatelessWidget {

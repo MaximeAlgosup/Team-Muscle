@@ -5,7 +5,7 @@ import 'package:team_muscle/models/exercise_model.dart';
 // import 'package:team_muscle/models/tag_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/exercise_table.dart';
+import 'package:team_muscle/database/tables/exercise_table.dart';
 
 class ExerciseController {
 

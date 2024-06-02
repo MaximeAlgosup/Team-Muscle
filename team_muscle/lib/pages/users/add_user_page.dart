@@ -10,7 +10,7 @@ import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
 import 'package:team_muscle/models/user_model.dart';
 
 // Tables
-import 'package:team_muscle/tables/user_table.dart';
+import 'package:team_muscle/database/tables/user_table.dart';
 
 class AddUserPage extends StatelessWidget {
   const AddUserPage({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:team_muscle/routes.dart';
 import 'dart:async';
-import 'package:team_muscle/tables/db_creation.dart';
+import 'package:team_muscle/database/database_setup.dart';
 import 'package:team_muscle/globals.dart' as globals;
 
 Future<void> main() async {
