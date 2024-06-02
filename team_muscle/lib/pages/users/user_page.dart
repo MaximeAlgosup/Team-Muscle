@@ -27,16 +27,17 @@ class _UserPageState extends State<UserPage>
   bool _isUser = false;
 
   Future<void> updateIsUser() async {
-      final List<UserModel> usersList = await users();
-      if (globals.userIndex != null && usersList.isNotEmpty) {
-        setState(() {
-          _isUser = true;
-        });
-      } else {
-        setState(() {
-          _isUser = false;
-        });
-      }
+    final List<UserModel> usersList = await users();
+    if (globals.userIndex != null && usersList.isNotEmpty) {
+      setState(() {
+        _isUser = true;
+        context.goNamed('profile');
+      });
+    } else {
+      setState(() {
+        _isUser = false;
+      });
+    }
   }
 
   Future<List<UserModel>> getUsers() async {
@@ -74,6 +75,17 @@ class _UserPageState extends State<UserPage>
   @override
   void initState() {
     super.initState();
+    if (globals.userIndex != null) {
+      updateIsUser();
+      setState(() {
+        _isUser = true;
+        context.goNamed('profile');
+      });
+    } else {
+      setState(() {
+        _isUser = false;
+      });
+    }
     _controller = AnimationController(vsync: this);
 
     _controller.addListener(() {
@@ -81,20 +93,6 @@ class _UserPageState extends State<UserPage>
         _dragAlignment = _animation.value;
       });
     });
-
-    if(globals.userIndex != null){
-      updateIsUser();
-      setState(() {
-        _isUser = true;
-        context.goNamed('profile');
-      });
-    }
-    else{
-      setState(() {
-        _isUser = false;
-      });
-    }
-
   }
 
   @override
@@ -124,7 +122,7 @@ class _UserPageState extends State<UserPage>
             print("Pad released!");
             updateIsUser();
             _runAnimation(details.velocity.pixelsPerSecond, size);
-            (_isUser == true)? context.goNamed('profile') : null;
+            (_isUser == true) ? context.goNamed('profile') : null;
           },
           child: Align(
             alignment: _dragAlignment,

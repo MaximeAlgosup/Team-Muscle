@@ -4,10 +4,16 @@ import 'dart:async';
 import 'package:team_muscle/database/database_setup.dart';
 import 'package:team_muscle/globals.dart' as globals;
 
+// Table
+import 'package:team_muscle/database/tables/last_connection_table.dart';
+
 Future<void> main() async {
   runApp(const MainApp());
   WidgetsFlutterBinding.ensureInitialized();
   globals.database = database();
+  if(await isLastConnectionEmpty() == false) {
+    globals.userIndex = await getLastConnection().then((value) => value.userId);
+  }
 }
 
 class MainApp extends StatelessWidget {

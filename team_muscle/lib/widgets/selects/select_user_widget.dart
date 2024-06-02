@@ -5,9 +5,11 @@ import 'package:go_router/go_router.dart';
 
 // Models
 import 'package:team_muscle/models/user_model.dart';
+import 'package:team_muscle/models/last_connection_model.dart';
 
 // Tables
 import 'package:team_muscle/database/tables/user_table.dart';
+import 'package:team_muscle/database/tables/last_connection_table.dart';
 
 class SelectUserWidget extends StatefulWidget {
   const SelectUserWidget({super.key});
@@ -16,13 +18,11 @@ class SelectUserWidget extends StatefulWidget {
   _SelectUserWidgetState createState() => _SelectUserWidgetState();
 }
 
-
 class _SelectUserWidgetState extends State<SelectUserWidget> {
-
   Future<List<UserModel>> getUsers() async {
     List<UserModel> usersList = await users();
     // print all users data
-    if(kDebugMode) {
+    if (kDebugMode) {
       for (int i = 0; i < usersList.length; i++) {
         debugPrint("User: ${usersList[i].toString()}");
       }
@@ -62,6 +62,11 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                       icon: const Icon(Icons.how_to_reg),
                       onPressed: () {
                         globals.userIndex = usersSnapshot.data![index].id;
+                        insertLastConnection(LastConnectionModel(
+                          id: 1,
+                          userId: usersSnapshot.data![index].id,
+                          date: DateTime.now(),
+                        ));
                         context.goNamed("profile");
                       },
                     ),

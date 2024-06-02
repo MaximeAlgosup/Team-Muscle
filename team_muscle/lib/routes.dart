@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_muscle/globals.dart' as globals;
 
 // Users Pages
 import 'package:team_muscle/pages/users/user_page.dart';
@@ -17,7 +18,7 @@ import 'package:team_muscle/pages/exercises/edit_exercise_page.dart';
 import 'package:team_muscle/controllers/exercise_controller.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/pages/users/user_page.dart',
+  initialLocation: (globals.userIndex == null)?'/pages/users/user_page.dart' : '/pages/users/profile.dart',
   routes: [
     GoRoute(
       path: '/pages/users/user_page.dart',
