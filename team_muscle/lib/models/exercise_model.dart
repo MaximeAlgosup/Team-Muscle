@@ -1,13 +1,25 @@
 import 'package:team_muscle/models/tag_model.dart';
-import 'package:team_muscle/models/exercise_data_model.dart';
 
 class ExerciseModel {
+  final int id;
   final String name;
   final String description;
-  final List<TagModel> tags;
-  final List<ExerciseDataModel> data = [];
 
+  ExerciseModel({
+    required this.id,
+    required this.name,
+    required this.description});
 
-  ExerciseModel(
-      {required this.name, required this.description, required this.tags});
+  Map<String, Object?> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'ExerciseModel{id: $id, name: $name, description: $description}';
+  }
 }

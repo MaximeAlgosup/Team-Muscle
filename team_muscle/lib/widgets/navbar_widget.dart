@@ -34,7 +34,7 @@ class _NavbarWidgetState extends State<NavbarWidget> {
     setState(() {
       _selectedIndex = index;
       if(index == 0) {
-        return;
+        context.goNamed('exercise_list');
       } else if(index == 1) {
         return;
       } else if(index == 2) {

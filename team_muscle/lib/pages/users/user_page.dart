@@ -111,7 +111,7 @@ class _UserPageState extends State<UserPage>
             print("Pad released!");
             updateIsUser();
             _runAnimation(details.velocity.pixelsPerSecond, size);
-            context.goNamed('profile');
+            (_isUser == true)? context.goNamed('profile') : null;
           },
           child: Align(
             alignment: _dragAlignment,

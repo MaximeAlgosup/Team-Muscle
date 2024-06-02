@@ -62,7 +62,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                       icon: const Icon(Icons.how_to_reg),
                       onPressed: () {
                         globals.userIndex = usersSnapshot.data![index].id;
-                        context.goNamed("user");
+                        context.goNamed("profile");
                       },
                     ),
                   ),

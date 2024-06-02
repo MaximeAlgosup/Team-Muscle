@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Widgets
-import 'package:team_muscle/widgets/select_user_widget.dart';
+import 'package:team_muscle/widgets/selects/select_user_widget.dart';
 import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
 
@@ -15,11 +15,6 @@ import 'package:team_muscle/tables/user_table.dart';
 
 class SelectUserPage extends StatelessWidget {
   const SelectUserPage({super.key});
-
-  void printUsers() async {
-    final List<UserModel> usersList = await users();
-    debugPrint("number of users: ${usersList.toString()}");
-  }
 
   Future<bool> isUsers() async{
     final List<UserModel> usersList = await users();

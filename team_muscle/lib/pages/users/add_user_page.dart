@@ -15,11 +15,6 @@ import 'package:team_muscle/tables/user_table.dart';
 class AddUserPage extends StatelessWidget {
   const AddUserPage({super.key});
 
-  void printUsers() async {
-    final List<UserModel> usersList = await users();
-    debugPrint("number of users: ${usersList.toString()}");
-  }
-
   Future<List<UserModel>> getUsers() async {
     final List<UserModel> usersList = await users();
     return usersList;
