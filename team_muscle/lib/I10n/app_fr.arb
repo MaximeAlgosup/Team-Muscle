@@ -1,0 +1,6 @@
+{
+  "helloWorld": "Bonjour monde !",
+  "@helloWorld": {
+    "description": "Le voisin conventionnel du dev"
+  }
+}

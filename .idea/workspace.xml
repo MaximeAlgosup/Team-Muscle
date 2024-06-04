@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c35a3151-5434-4ca4-9421-d8bfba8692d8" name="Changes" comment="" />
+    <list default="true" id="c35a3151-5434-4ca4-9421-d8bfba8692d8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Team-Muscle.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Team-Muscle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,9 +23,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2hB76Xcmym42YMGrbbPsCx6DA3j" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,7 +42,8 @@
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MaximeCARON/Documents/Algosup/2023_2024/phase_5/Flutter/Team-Muscle/team_muscle",
+    "last_opened_file_path": "D:/PERSO/YOUTUBE/Team-Muscle/App/Team-Muscle/team_muscle",
+    "settings.editor.selected.configurable": "dart.settings",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
