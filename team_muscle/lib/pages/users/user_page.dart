@@ -133,6 +133,7 @@ class _UserPageState extends State<UserPage>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 // crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Center(
                     child: IconButtonWidget(
                       label: 'Log In',
@@ -151,6 +152,7 @@ class _UserPageState extends State<UserPage>
                           },
                         ))
                       : const Text(""),
+
                 ],
               ),
             ),

@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_muscle/globals.dart' as globals;
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_controller.dart';
+import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 
 // Tables
 import 'package:team_muscle/widgets/fields/text_area_widget.dart';
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 
 class ExercisePage extends StatelessWidget {
-  const ExercisePage({
-    required this.exerciseController,
-    required this.ExerciseId,
-    super.key});
+  const ExercisePage(
+      {required this.exerciseController, required this.ExerciseId, super.key});
 
   final ExerciseController exerciseController;
   final String ExerciseId;
@@ -39,7 +39,8 @@ class ExercisePage extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.edit, color: Colors.black),
                     onPressed: () {
-                      context.goNamed('edit_exercise', queryParameters: {'exerciseId': ExerciseId});
+                      context.goNamed('edit_exercise',
+                          queryParameters: {'exerciseId': ExerciseId});
                     },
                   ),
                 ],
@@ -59,7 +60,17 @@ class ExercisePage extends StatelessWidget {
                       hintText: 'Enter the exercise description',
                       controller: exerciseController.description,
                       isEditable: false,
-                    )
+                    ),
+                    IconButtonWidget(
+                        label: "Add Data",
+                        onPressed: () {
+                          context.goNamed('add_exo_data', queryParameters: {
+                            'exerciseId': ExerciseId,
+                            'userId': globals.userIndex.toString(),
+                            'exerciseName': exerciseController.name.text.toString()
+                          });
+                        },
+                        icon: Icons.add)
                   ],
                 ),
               ),
