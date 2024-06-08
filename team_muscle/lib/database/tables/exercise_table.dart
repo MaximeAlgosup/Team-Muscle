@@ -54,6 +54,17 @@ Future<List<ExerciseModel>> exercises() async {
   ];
 }
 
+Future<String> getExerciseNameById(int id) async {
+  final db = await globals.database;
+  final List<Map<String, Object?>> exerciseMaps = await db.query(
+    'exercises',
+    where: 'id = ?',
+    whereArgs: [id],
+  );
+
+  return exerciseMaps.first['name'] as String;
+}
+
 Future<void> deleteExerciseRow(String name) async {
   final db = await globals.database;
   await db.delete(

@@ -9,6 +9,7 @@ import 'package:team_muscle/database/tables/exercise_data_table.dart';
 
 class ExerciseDataController {
 
+
   final TextEditingController date = TextEditingController();
   final TextEditingController weight = TextEditingController();
   final TextEditingController reps = TextEditingController();
@@ -52,6 +53,7 @@ class ExerciseDataController {
   void setById(int id) async {
     final ExerciseDataModel exerciseData = await findExerciseDataById(id);
     setFields(exerciseData);
+    debugPrint(exerciseData.toString());
   }
 
   void setPersonalRecord(bool isPersonalRecord) {
@@ -83,8 +85,8 @@ class ExerciseDataController {
     clearFields();
   }
 
-  void deleteExerciseData() async {
-    await deleteExerciseDataRow(int.parse(date.text));
+  void deleteExerciseData(int id) async {
+    await deleteExerciseDataRow(id);
   }
 
   void saveExerciseData() async{

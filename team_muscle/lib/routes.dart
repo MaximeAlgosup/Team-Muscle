@@ -17,11 +17,16 @@ import 'package:team_muscle/pages/exercises/edit_exercise_page.dart';
 
 // Exercises Data Pages
 import 'package:team_muscle/pages/exercise_datas/add_exercise_data_page.dart';
+import 'package:team_muscle/pages/exercise_datas/edit_exercise_data_page.dart';
 import 'package:team_muscle/pages/exercise_datas/exercise_data_list_page.dart';
+import 'package:team_muscle/pages/exercise_datas/exercise_data_page.dart';
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_controller.dart';
 import 'package:team_muscle/controllers/exercise_data_controller.dart';
+
+// Table
+import 'package:team_muscle/database/tables/exercise_table.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: (globals.userIndex == null)
@@ -126,7 +131,59 @@ final GoRouter router = GoRouter(
           if (exerciseId == null) {
             return const MaterialPage(child: ExerciseListPage());
           }
-          return MaterialPage(child: ExerciseDataListPage(exerciseId: int.parse(exerciseId)));
+          return MaterialPage(
+              child: ExerciseDataListPage(exerciseId: int.parse(exerciseId)));
+        }),
+    GoRoute(
+      path: '/pages/exercise_datas/exercise_data_page.dart',
+      name: 'exercise_data',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
+        if (exerciseDataId == null) {
+          return const MaterialPage(child: ExerciseListPage());
+        }
+        ExerciseDataController exerciseDataController =
+            ExerciseDataController();
+        exerciseDataController.setById(int.parse(exerciseDataId));
+
+        return MaterialPage(
+          child: FutureBuilder<String>(
+            future: getExerciseNameById(int.parse(exerciseDataId)),
+            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else {
+                String name = snapshot.data ?? "Unknown exercise";
+                return ExerciseDataPage(
+                  exerciseDataId: int.parse(exerciseDataId),
+                  controller: exerciseDataController,
+                  exerciseName: name,
+                );
+              };
+            },
+          ),
+        );
+      },
+    ),
+    GoRoute(
+        path: '/pages/exercise_datas/edit_exercise_data_page.dart',
+        name: 'edit_exo_data',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
+          var exerciseName = state.uri.queryParameters['exerciseName'];
+          ExerciseDataController exerciseDataController =
+          ExerciseDataController();
+          exerciseDataController.setById(int.parse(exerciseDataId!));
+          debugPrint("test = ${exerciseDataController.toString()}");
+          debugPrint("test = ${exerciseDataController.isPersonalRecord.text == 'true'}");
+          return MaterialPage(
+              child: EditExerciseDataPage(
+                  isPersonalRecord: exerciseDataController.isPersonalRecord.text == 'true',
+                  exerciseDataId: int.parse(exerciseDataId),
+                  exerciseDataController: exerciseDataController,
+                  exerciseName: exerciseName.toString()));
         }),
   ],
 );
