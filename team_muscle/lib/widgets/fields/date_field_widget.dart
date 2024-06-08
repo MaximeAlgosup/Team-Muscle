@@ -7,7 +7,7 @@ class DateFieldWidget extends StatelessWidget {
     required this.controller,
     this.titleFontSize = 20,
     this.hintFontSize = 15,
-    this.isEditable = true,
+    this.isEditable = false,
     super.key,
   });
 

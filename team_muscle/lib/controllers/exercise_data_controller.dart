@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // Models
 import 'package:team_muscle/models/exercise_data_model.dart';
@@ -58,7 +59,7 @@ class ExerciseDataController {
   }
 
   void setBaseData(String exerciseId, String userId) {
-    date.text = '';
+    date.text = '2012-12-21';
     weight.text = '0';
     reps.text = '0';
     sets.text = '0';
@@ -87,12 +88,12 @@ class ExerciseDataController {
   }
 
   void saveExerciseData() async{
-    // get exerciseDatas number
-    int exerciseDatasNumber = await exerciseDatas().then((value) => value.length);
-    int exerciseDataId = exerciseDatasNumber + 1;
+    int exerciseDataNumber = await getTableLength();
+    int exerciseDataId = exerciseDataNumber + 1;
+    String date = this.date.text.replaceAll('/', '-');
     ExerciseDataModel exerciseData = ExerciseDataModel(
       id: exerciseDataId,
-      date: DateTime.parse(date.text..replaceAll('/', '-')),
+      date: DateFormat('yyyy-MM-dd').parse(date),
       weight: double.parse(weight.text),
       reps: int.parse(reps.text),
       sets: int.parse(sets.text),
@@ -100,6 +101,7 @@ class ExerciseDataController {
       exerciseId: int.parse(exerciseId.text),
       userId: int.parse(userId.text),
     );
+    debugPrint(exerciseData.toString());
     insertExerciseData(exerciseData);
     clearFields();
   }

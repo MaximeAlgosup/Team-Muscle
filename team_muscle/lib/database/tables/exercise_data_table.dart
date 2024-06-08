@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:team_muscle/globals.dart' as globals;
 
@@ -44,10 +46,18 @@ Future<void> updateExerciseDataRow(ExerciseDataModel exerciseData) async {
   );
 }
 
+Future<int> getTableLength() async {
+  final db = await globals.database;
+  final List<Map<String, Object?>> exerciseDataMaps = await db.query('exerciseDatas');
+  return exerciseDataMaps.length;
+}
+
 Future<List<ExerciseDataModel>> exerciseDatas() async {
   final db = await globals.database;
   final List<Map<String, Object?>> exerciseDataMaps = await db.query('exerciseDatas');
-
+  for(var i = 0; i < exerciseDataMaps.length; i++) {
+    print(exerciseDataMaps[i].toString());
+  }
   return [
     for (final {
       'id': id as int,
@@ -70,6 +80,35 @@ Future<List<ExerciseDataModel>> exerciseDatas() async {
         userId: userId,
       ),
   ];
+}
+
+Future<List<ExerciseDataModel>> exerciseDatasByUserAndExerciseId(int exerciseId, int userId) async {
+  debugPrint("Exercise ID: $exerciseId");
+  debugPrint("User ID: $userId");
+  final db = await globals.database;
+  final List<Map<String, Object?>> exerciseDataMaps = await db.query(
+    'exerciseDatas',
+    where: 'exerciseId = ? AND userId = ?',
+    whereArgs: [exerciseId, userId],
+  );
+  // print result length
+  debugPrint("Exercise Data Length: ${exerciseDataMaps.length}");
+  for(var i = 0; i < exerciseDataMaps.length; i++) {
+    debugPrint("Exercises found: ${exerciseDataMaps[i].toString()}");
+  }
+
+  return exerciseDataMaps.map((map) {
+    return ExerciseDataModel(
+      id: map['id'] as int,
+      date: DateFormat('yyyy-MM-dd').parse(map['date'] as String),
+      weight: map['weight'] as double,
+      reps: map['reps'] as int,
+      sets: map['sets'] as int,
+      isPersonalRecord: (map['isPersonalRecord'] as int) == 1,
+      exerciseId: exerciseId,
+      userId: userId,
+    );
+  }).toList();
 }
 
 Future<void> deleteExerciseDataRow(int id) async {

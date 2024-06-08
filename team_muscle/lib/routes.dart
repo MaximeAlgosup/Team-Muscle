@@ -17,6 +17,7 @@ import 'package:team_muscle/pages/exercises/edit_exercise_page.dart';
 
 // Exercises Data Pages
 import 'package:team_muscle/pages/exercise_datas/add_exercise_data_page.dart';
+import 'package:team_muscle/pages/exercise_datas/exercise_data_list_page.dart';
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_controller.dart';
@@ -116,6 +117,16 @@ final GoRouter router = GoRouter(
               child: AddExerciseDataPage(
                   exerciseDataController: exerciseDataController,
                   exerciseName: exerciseName.toString()));
+        }),
+    GoRoute(
+        path: '/pages/exercise_datas/exercise_data_list_page.dart',
+        name: 'exercise_data_list',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          var exerciseId = state.uri.queryParameters['exerciseId'];
+          if (exerciseId == null) {
+            return const MaterialPage(child: ExerciseListPage());
+          }
+          return MaterialPage(child: ExerciseDataListPage(exerciseId: int.parse(exerciseId)));
         }),
   ],
 );

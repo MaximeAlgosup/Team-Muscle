@@ -11,6 +11,7 @@ import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 import 'package:team_muscle/widgets/fields/text_area_widget.dart';
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 
+
 class ExercisePage extends StatelessWidget {
   const ExercisePage(
       {required this.exerciseController, required this.ExerciseId, super.key});
@@ -45,34 +46,37 @@ class ExercisePage extends StatelessWidget {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    TextFieldWidget(
-                      label: 'Name',
-                      hintText: 'Enter the exercise name',
-                      controller: exerciseController.name,
-                      isEditable: false,
-                    ),
-                    TextAreaWidget(
-                      label: 'Description',
-                      hintText: 'Enter the exercise description',
-                      controller: exerciseController.description,
-                      isEditable: false,
-                    ),
-                    IconButtonWidget(
-                        label: "Add Data",
-                        onPressed: () {
-                          context.goNamed('add_exo_data', queryParameters: {
-                            'exerciseId': ExerciseId,
-                            'userId': globals.userIndex.toString(),
-                            'exerciseName': exerciseController.name.text.toString()
-                          });
-                        },
-                        icon: Icons.add)
-                  ],
-                ),
+
+              TextFieldWidget(
+                label: 'Name',
+                hintText: 'Enter the exercise name',
+                controller: exerciseController.name,
+                isEditable: false,
+              ),
+              TextAreaWidget(
+                label: 'Description',
+                hintText: 'Enter the exercise description',
+                controller: exerciseController.description,
+                isEditable: false,
+              ),
+              IconButtonWidget(
+                label: "Add Data",
+                onPressed: () {
+                  context.goNamed('add_exo_data', queryParameters: {
+                    'exerciseId': ExerciseId,
+                    'userId': globals.userIndex.toString(),
+                    'exerciseName': exerciseController.name.text.toString()
+                  });
+                },
+                icon: Icons.add,
+              ),
+              IconButtonWidget(
+                label: "View Data",
+                onPressed: () {
+                  context.goNamed('exercise_data_list',
+                      queryParameters: {'exerciseId': ExerciseId});
+                },
+                icon: Icons.visibility,
               ),
             ],
           ),
