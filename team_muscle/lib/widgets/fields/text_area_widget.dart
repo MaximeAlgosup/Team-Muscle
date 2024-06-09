@@ -8,6 +8,7 @@ class TextAreaWidget extends StatelessWidget {
         this.titleFontSize = 20,
         this.hintFontSize = 15,
         this.isEditable = true,
+        this.maxLines = 3,
         super.key});
 
   final String label;
@@ -15,6 +16,7 @@ class TextAreaWidget extends StatelessWidget {
   final double titleFontSize;
   final double hintFontSize;
   final bool isEditable;
+  final int maxLines;
   final TextEditingController controller;
 
   @override
@@ -40,7 +42,7 @@ class TextAreaWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: TextField(
-                  maxLines: 5,
+                  maxLines: maxLines,
                   enabled: isEditable,
                   controller: controller,
                   decoration: InputDecoration(

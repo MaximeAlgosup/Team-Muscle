@@ -12,21 +12,23 @@ import 'package:team_muscle/database/tables/exercise_data_table.dart';
 class SelectExerciseRecordWidget extends StatefulWidget {
   final int exerciseId;
   final int userId = (globals.userIndex == null) ? 1 : globals.userIndex!;
+  final String exerciseName;
 
-  SelectExerciseRecordWidget({required this.exerciseId, super.key});
+  SelectExerciseRecordWidget({required this.exerciseId, required this.exerciseName, super.key});
 
   @override
   State<SelectExerciseRecordWidget> createState() =>
-      _SelectExerciseRecordWidgetState(exerciseId: exerciseId, userId: userId);
+      _SelectExerciseRecordWidgetState(exerciseId: exerciseId, userId: userId, exerciseName: exerciseName);
 }
 
 class _SelectExerciseRecordWidgetState
     extends State<SelectExerciseRecordWidget> {
   final int exerciseId;
   final int userId;
+  final String exerciseName;
 
   _SelectExerciseRecordWidgetState(
-      {required this.exerciseId, required this.userId});
+      {required this.exerciseId, required this.userId, required this.exerciseName});
 
   Future<List<ExerciseDataModel>> getExerciseData() async {
     List<ExerciseDataModel> exerciseDataList =
@@ -57,8 +59,7 @@ class _SelectExerciseRecordWidgetState
       builder: (BuildContext context,
           AsyncSnapshot<List<ExerciseDataModel>> exerciseDataSnapshot) {
         if (exerciseDataSnapshot.hasData) {
-          return Expanded(
-            child: RefreshIndicator(
+          return RefreshIndicator(
               onRefresh: () async {
                 setState(() {
                   exerciseDataList = getExerciseData();
@@ -75,14 +76,16 @@ class _SelectExerciseRecordWidgetState
                       trailing: IconButton(
                         icon: const Icon(Icons.visibility),
                         onPressed: () {
-                          context.goNamed('exercise_data', queryParameters: {"exerciseDataId": exerciseDataSnapshot.data![index].id.toString()});
+                          context.goNamed('exercise_data', queryParameters: {
+                            "exerciseDataId": exerciseDataSnapshot.data![index].id.toString(),
+                            "exerciseName": exerciseName,
+                          });
                         },
                       ),
                     ),
                   );
                 },
               ),
-            ),
           );
         } else {
           return GestureDetector(

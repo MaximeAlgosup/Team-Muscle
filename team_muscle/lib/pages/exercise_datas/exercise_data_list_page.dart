@@ -33,9 +33,6 @@ class ExerciseDataListPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SelectExerciseRecordWidget(
-                exerciseId: exerciseId,
-              ),
             ],
           ),
         ),

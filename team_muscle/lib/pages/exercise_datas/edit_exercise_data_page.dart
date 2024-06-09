@@ -38,7 +38,6 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     setState(() {
       _isPersonalRecord =
@@ -61,8 +60,8 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                   IconButton(
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
-                      context.goNamed('exercise_data', queryParameters: {
-                        'exerciseDataId': _exerciseDataId.toString()
+                      context.goNamed('exercise', queryParameters: {
+                        'exerciseId': _exerciseDataController.exerciseId.text
                       });
                     },
                   ),
@@ -155,7 +154,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                     onPressed: () {
                       _exerciseDataController
                           .deleteExerciseData(_exerciseDataId);
-                      context.goNamed('exercise_data_list', queryParameters: {
+                      context.goNamed('exercise', queryParameters: {
                         'exerciseId': _exerciseDataController.exerciseId.text
                       });
                     },

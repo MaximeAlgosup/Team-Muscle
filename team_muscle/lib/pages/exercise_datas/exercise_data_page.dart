@@ -8,8 +8,8 @@ import "package:team_muscle/controllers/exercise_data_controller.dart";
 import "package:team_muscle/widgets/panels/double_data_panel_widget.dart";
 import 'package:team_muscle/widgets/panels/round_panel_widget.dart';
 
-class ExerciseDataPage extends StatelessWidget {
-  const ExerciseDataPage(
+class ExerciseDataPage extends StatefulWidget{
+  ExerciseDataPage(
       {required this.exerciseDataId,
       required this.exerciseName,
       required this.controller,
@@ -17,7 +17,34 @@ class ExerciseDataPage extends StatelessWidget {
 
   final int exerciseDataId;
   final String exerciseName;
+  ExerciseDataController controller;
+
+
+  @override
+  _ExerciseDataPageState createState() => _ExerciseDataPageState(
+      exerciseDataId: exerciseDataId,
+      exerciseName: exerciseName,
+      controller: controller);
+}
+
+class _ExerciseDataPageState extends State<ExerciseDataPage> {
+  _ExerciseDataPageState({
+    required this.exerciseDataId,
+    required this.exerciseName,
+    required this.controller});
+
+  final int exerciseDataId;
+  final String exerciseName;
   final ExerciseDataController controller;
+
+  @override
+  initState() {
+    setState(() {
+      controller.setById(exerciseDataId);
+    });
+    super.initState();
+    debugPrint("Passe");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +60,7 @@ class ExerciseDataPage extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                   onPressed: () {
-                    context.goNamed('exercise_data_list', queryParameters: {
+                    context.goNamed('exercise', queryParameters: {
                       'exerciseId': controller.exerciseId.text
                     });
                   },
@@ -108,6 +135,20 @@ class ExerciseDataPage extends StatelessWidget {
                       color: Colors.black,
                       thickness: 2,
                     ),
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              debugPrint("update button is pressed");
+                              controller.setById(exerciseDataId);
+                            });
+                          },
+                          icon: const Icon(Icons.update),
+                        )
+                      ]
                   ),
                 ],
               ),

@@ -49,6 +49,11 @@ class ExerciseDataController {
     userId.text = exerciseData.userId.toString();
   }
 
+  ExerciseDataController getExoDataById(int id)  {
+    Future<ExerciseDataModel> futureExerciseData = findExerciseDataById(id);
+    futureExerciseData.then((exerciseData) => setFields(exerciseData));
+    return this;
+  }
 
 
   void setById(int id) async {

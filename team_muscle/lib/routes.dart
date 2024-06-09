@@ -133,39 +133,21 @@ final GoRouter router = GoRouter(
               child: ExerciseDataListPage(exerciseId: int.parse(exerciseId)));
         }),
     GoRoute(
-      path: '/pages/exercise_datas/exercise_data_page.dart',
-      name: 'exercise_data',
-      pageBuilder: (BuildContext context, GoRouterState state) {
-        var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
-        if (exerciseDataId == null) {
-          return const MaterialPage(child: ExerciseListPage());
-        }
-        ExerciseDataController exerciseDataController =
-            ExerciseDataController();
-        exerciseDataController.setById(int.parse(exerciseDataId));
-
-        return MaterialPage(
-          child: FutureBuilder<String>(
-            future: getExerciseNameById(int.parse(exerciseDataId)),
-            builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                String name = snapshot.data ?? "Unknown exercise";
-                return ExerciseDataPage(
+        path: '/pages/exercise_datas/exercise_data_page.dart',
+        name: 'exercise_data',
+        pageBuilder: (BuildContext context, GoRouterState state) {
+          var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
+          var exerciseName = state.uri.queryParameters['exerciseName'];
+          if (exerciseDataId == null) {
+            return const MaterialPage(child: ExerciseListPage());
+          }
+          ExerciseDataController exerciseDataController = ExerciseDataController().getExoDataById(int.parse(exerciseDataId));
+          return MaterialPage(
+              child: ExerciseDataPage(
                   exerciseDataId: int.parse(exerciseDataId),
                   controller: exerciseDataController,
-                  exerciseName: name,
-                );
-              }
-              ;
-            },
-          ),
-        );
-      },
-    ),
+                  exerciseName: exerciseName.toString()));
+        }),
     GoRoute(
       path: '/pages/exercise_datas/edit_exercise_data_page.dart',
       name: 'edit_exo_data',
@@ -182,7 +164,7 @@ final GoRouter router = GoRouter(
             exerciseDataId: int.parse(exerciseDataId),
             exerciseDataController: exerciseDataController,
             exerciseName: exerciseName.toString(),
-            isPersonalRecord: isPersonalRecord== 'true',
+            isPersonalRecord: isPersonalRecord == 'true',
           ),
         );
       },

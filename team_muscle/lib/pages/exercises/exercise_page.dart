@@ -59,22 +59,38 @@ class ExercisePage extends StatelessWidget {
                 controller: exerciseController.description,
                 isEditable: false,
               ),
-              IconButtonWidget(
-                label: "Add Data",
-                onPressed: () {
-                  context.goNamed('add_exo_data', queryParameters: {
-                    'exerciseId': exerciseId,
-                    'userId': globals.userIndex.toString(),
-                    'exerciseName': exerciseController.name.text.toString()
-                  });
-                },
-                icon: Icons.add,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.add),
+                      color: Colors.amber[800],
+                      onPressed: () {
+                        context.goNamed('add_exo_data', queryParameters: {
+                          'exerciseId': exerciseId,
+                          'exerciseName': exerciseController.name.text,
+                          'userId': globals.userIndex.toString(),
+                        });
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.trending_up_outlined),
+                      color: Colors.green,
+                      onPressed: () {
+                        debugPrint("data button is pressed");
+                      },
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.3,
+                height: MediaQuery.of(context).size.height * 0.4,
                 child: SelectExerciseRecordWidget(
                   exerciseId: int.parse(exerciseId),
+                  exerciseName: exerciseController.name.text,
                 ),
               ),
             ],
