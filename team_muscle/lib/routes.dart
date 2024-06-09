@@ -86,7 +86,7 @@ final GoRouter router = GoRouter(
           return MaterialPage(
               child: ExercisePage(
                   exerciseController: exerciseController,
-                  ExerciseId: exerciseId));
+                  exerciseId: exerciseId));
         }),
     GoRoute(
         path: '/pages/exercises/edit_exercise_page.dart',

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
-import 'package:team_muscle/widgets/fields/date_field_widget.dart';
 
 // Widgets
 import 'package:team_muscle/widgets/fields/number_field_widget.dart';
-import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
+import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
+import 'package:team_muscle/widgets/fields/date_field_widget.dart';
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_data_controller.dart';
