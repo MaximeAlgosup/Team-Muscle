@@ -44,6 +44,7 @@ class ExerciseDataController {
     reps.text = exerciseData.reps.toString();
     sets.text = exerciseData.sets.toString();
     isPersonalRecord.text = exerciseData.isPersonalRecord.toString();
+    isPersonalRecord.text = exerciseData.isPersonalRecord.toString();
     exerciseId.text = exerciseData.exerciseId.toString();
     userId.text = exerciseData.userId.toString();
   }
@@ -52,8 +53,8 @@ class ExerciseDataController {
 
   void setById(int id) async {
     final ExerciseDataModel exerciseData = await findExerciseDataById(id);
-    setFields(exerciseData);
     debugPrint(exerciseData.toString());
+    setFields(exerciseData);
   }
 
   void setPersonalRecord(bool isPersonalRecord) {

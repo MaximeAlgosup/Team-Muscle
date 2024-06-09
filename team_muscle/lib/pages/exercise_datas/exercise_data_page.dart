@@ -42,7 +42,9 @@ class ExerciseDataPage extends StatelessWidget {
                   icon: const Icon(Icons.edit, color: Colors.black),
                   onPressed: () {
                     context.goNamed('edit_exo_data', queryParameters: {
-                      'exerciseDataId': exerciseDataId.toString()
+                      'exerciseDataId': exerciseDataId.toString(),
+                      'exerciseName': exerciseName.toString(),
+                      'isPersonalRecord': controller.isPersonalRecord.text,
                     });
                   },
                 ),

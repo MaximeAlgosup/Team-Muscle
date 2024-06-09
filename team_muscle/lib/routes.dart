@@ -29,9 +29,7 @@ import 'package:team_muscle/controllers/exercise_data_controller.dart';
 import 'package:team_muscle/database/tables/exercise_table.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: (globals.userIndex == null)
-      ? '/pages/users/user_page.dart'
-      : '/pages/users/profile.dart',
+  initialLocation: '/pages/users/user_page.dart',
   routes: [
     GoRoute(
         path: '/pages/users/user_page.dart',
@@ -161,29 +159,33 @@ final GoRouter router = GoRouter(
                   controller: exerciseDataController,
                   exerciseName: name,
                 );
-              };
+              }
+              ;
             },
           ),
         );
       },
     ),
     GoRoute(
-        path: '/pages/exercise_datas/edit_exercise_data_page.dart',
-        name: 'edit_exo_data',
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
-          var exerciseName = state.uri.queryParameters['exerciseName'];
-          ExerciseDataController exerciseDataController =
-          ExerciseDataController();
-          exerciseDataController.setById(int.parse(exerciseDataId!));
-          debugPrint("test = ${exerciseDataController.toString()}");
-          debugPrint("test = ${exerciseDataController.isPersonalRecord.text == 'true'}");
-          return MaterialPage(
-              child: EditExerciseDataPage(
-                  isPersonalRecord: exerciseDataController.isPersonalRecord.text == 'true',
-                  exerciseDataId: int.parse(exerciseDataId),
-                  exerciseDataController: exerciseDataController,
-                  exerciseName: exerciseName.toString()));
-        }),
+      path: '/pages/exercise_datas/edit_exercise_data_page.dart',
+      name: 'edit_exo_data',
+      pageBuilder: (BuildContext context, GoRouterState state) {
+        var exerciseDataId = state.uri.queryParameters['exerciseDataId'];
+        var exerciseName = state.uri.queryParameters['exerciseName'];
+        var isPersonalRecord = state.uri.queryParameters['isPersonalRecord'];
+        ExerciseDataController exerciseDataController =
+            ExerciseDataController();
+        exerciseDataController.setById(int.parse(exerciseDataId!));
+        exerciseDataController.setPersonalRecord(isPersonalRecord == 'true');
+        return MaterialPage(
+          child: EditExerciseDataPage(
+            exerciseDataId: int.parse(exerciseDataId),
+            exerciseDataController: exerciseDataController,
+            exerciseName: exerciseName.toString(),
+            isPersonalRecord: isPersonalRecord== 'true',
+          ),
+        );
+      },
+    ),
   ],
 );

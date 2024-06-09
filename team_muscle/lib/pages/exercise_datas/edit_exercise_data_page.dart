@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
 import 'package:team_muscle/widgets/fields/date_field_widget.dart';
 
 // Widgets
@@ -23,8 +24,8 @@ class EditExerciseDataPage extends StatefulWidget {
   bool isPersonalRecord;
 
   @override
-  State<EditExerciseDataPage> createState() =>
-      _EditExerciseDataPageState(exerciseDataId, exerciseDataController, exerciseName, isPersonalRecord);
+  State<EditExerciseDataPage> createState() => _EditExerciseDataPageState(
+      exerciseDataId, exerciseDataController, exerciseName, isPersonalRecord);
 }
 
 class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
@@ -33,23 +34,21 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
   final String _exerciseName;
   bool _isPersonalRecord;
 
-  _EditExerciseDataPageState(this._exerciseDataId, this._exerciseDataController, this._exerciseName, this._isPersonalRecord);
-
+  _EditExerciseDataPageState(this._exerciseDataId, this._exerciseDataController,
+      this._exerciseName, this._isPersonalRecord);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     setState(() {
-      _isPersonalRecord =  _exerciseDataController.isPersonalRecord.text == 'true';
+      _isPersonalRecord =
+          _exerciseDataController.isPersonalRecord.text == 'true';
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('exerciseId: ${_isPersonalRecord.toString()}');
-    debugPrint('exerciseId: ${_exerciseDataController.isPersonalRecord.text}');
-
     return Scaffold(
       backgroundColor: Colors.grey[600],
       body: SafeArea(
@@ -64,7 +63,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                     icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
                     onPressed: () {
                       context.goNamed('exercise_data', queryParameters: {
-                        'exerciseId': _exerciseDataController.exerciseId.text
+                        'exerciseDataId': _exerciseDataId.toString()
                       });
                     },
                   ),
@@ -76,7 +75,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Text(
-                        "Add new ${_exerciseName.toLowerCase()} record",
+                        "Edit ${_exerciseName.toLowerCase()} record",
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 30,
@@ -112,7 +111,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Switch(
-                      value:  _isPersonalRecord,
+                      value: _isPersonalRecord,
                       activeColor: Colors.amber[800],
                       onChanged: (value) {
                         setState(() {
@@ -134,34 +133,33 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButtonWidget(
+                  SimpleButtonWidget(
                     label: "Save record",
                     onPressed: () {
                       _exerciseDataController
                           .setPersonalRecord(_isPersonalRecord);
-                      debugPrint('exerciseId: ${_exerciseDataController.exerciseId.text}');
-                      // _exerciseDataController.updateExerciseData(_exerciseDataId);
-                      // context.goNamed('exercise_data_list', queryParameters: {
-                      //   'exerciseId': _exerciseDataController.exerciseId.text
-                      // });
+                      _exerciseDataController
+                          .updateExerciseData(_exerciseDataId);
+                      context.goNamed('exercise_data', queryParameters: {
+                        'exerciseDataId': _exerciseDataId.toString()
+                      });
                     },
-                    icon: Icons.save,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButtonWidget(
-                        label: "Delete record",
-                        onPressed: () {
-                          _exerciseDataController.deleteExerciseData(_exerciseDataId);
-                          debugPrint('exerciseId: ${_exerciseDataController.exerciseId.text}');
-                          context.goNamed('exercise_data_list', queryParameters: {
-                            'exerciseId': _exerciseDataController.exerciseId.text
-                          });
-                        },
-                        icon: Icons.delete,
-                      ),
-                    ],
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SimpleButtonWidget(
+                    label: "Delete record",
+                    isWarning: true,
+                    onPressed: () {
+                      _exerciseDataController
+                          .deleteExerciseData(_exerciseDataId);
+                      context.goNamed('exercise_data_list', queryParameters: {
+                        'exerciseId': _exerciseDataController.exerciseId.text
+                      });
+                    },
                   ),
                 ],
               ),
