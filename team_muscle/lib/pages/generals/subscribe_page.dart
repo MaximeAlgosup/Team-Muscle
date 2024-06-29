@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:go_router/go_router.dart';
-import 'package:team_muscle/globals.dart' as globals;
 
 // Controllers
 import 'package:team_muscle/controllers/user_controller.dart';
@@ -8,44 +8,41 @@ import 'package:team_muscle/controllers/user_controller.dart';
 // Widgets
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
+import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
 import 'package:team_muscle/widgets/fields/number_field_widget.dart';
 
-class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({super.key});
+// Models
+import 'package:team_muscle/models/user_model.dart';
+
+// Tables
+import 'package:team_muscle/database/tables/user_table.dart';
+
+class SubscribePage extends StatefulWidget {
+  const SubscribePage({super.key});
 
   @override
-  _EditProfilePageState createState() => _EditProfilePageState();
+  _SubscribePageState createState() => _SubscribePageState();
 }
 
-class _EditProfilePageState extends State<EditProfilePage> {
+class _SubscribePageState extends State<SubscribePage> {
   final controller = UserController();
-
-  @override
-  initState() {
-    super.initState();
-    setState(() {
-      controller.setById(globals.userIndex!);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[600],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: BackAppBarWidget(
+          onTape: () {
+            context.goNamed("login");
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-                    onPressed: () {
-                      context.goNamed("profile");
-                    },
-                  ),
-                ],
-              ),
               TextFieldWidget(
                 label: 'Name: ',
                 hintText: 'Enter your name',
@@ -67,18 +64,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 controller: controller.weight,
               ),
               SimpleButtonWidget(
-                  label: 'Save data',
-                  onPressed: () {
-                    controller.updateUser(globals.userIndex!);
-                    context.goNamed("profile");
-                  }
-              ),
-              SimpleButtonWidget(
-                label: 'Delete user',
-                isWarning: true,
+                label: 'Save User',
                 onPressed: () {
-                  controller.deleteUser();
-                  context.goNamed('login');
+                  controller.saveUser();
+                  context.goNamed("login");
                 },
               ),
             ],

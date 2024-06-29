@@ -11,10 +11,15 @@ import 'package:team_muscle/models/user_model.dart';
 // Tables
 import 'package:team_muscle/database/tables/user_table.dart';
 
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
 
 
-class SelectUserPage extends StatelessWidget {
-  const SelectUserPage({super.key});
+class _LoginPageState extends State<LoginPage> {
 
   Future<bool> isUsers() async{
     final List<UserModel> usersList = await users();
@@ -34,26 +39,26 @@ class SelectUserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-          color: Colors.grey[600],
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                (isUsers() == false) ?
-                const Text("No users found, please add a new user") :
-                const SelectUserWidget(),
-                IconButtonWidget(
-                  label: 'Add User',
-                  icon: Icons.add,
-                  onPressed: () {
-                    context.goNamed('add_user');
-                  },
-                ),
-              ],
-            ),
+      body: Container(
+        color: Colors.grey[600],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              (isUsers() == false) ?
+              const Text("No users found, please add a new user") :
+              const SelectUserWidget(),
+              IconButtonWidget(
+                label: 'Add User',
+                icon: Icons.add,
+                onPressed: () {
+                  context.goNamed('subscribe');
+                },
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }

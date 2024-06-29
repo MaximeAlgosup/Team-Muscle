@@ -43,7 +43,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   IconButton(
                     icon: const Icon(Icons.logout, color: Colors.black),
                     onPressed: () {
-                      context.goNamed('select_user');
+                      context.goNamed('login');
                     },
                   ),
                   IconButton(
@@ -54,43 +54,108 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ],
               ),
-              TextFieldWidget(
-                label: 'Name: ',
-                hintText: 'Enter your name',
-                controller: controller.name,
-                isEditable: false,
-              ),
-              TextFieldWidget(
-                label: 'Date of birth: ',
-                hintText: 'Enter your date of birth',
-                controller: controller.age,
-                isEditable: false,
-              ),
-              TextFieldWidget(
-                label: 'Height (cm): ',
-                hintText: 'Enter your height in cm',
-                controller: controller.height,
-                isEditable: false,
-              ),
-              TextFieldWidget(
-                label: 'Weight (kg): ',
-                hintText: 'Enter your weight in kg',
-                controller: controller.weight,
-                isEditable: false,
-              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        setState(() {
-                          controller.setById(globals.userIndex!);
-                        });
-                      },
-                      icon: const Icon(Icons.update),
-                  )
-                ]
-              )
+                  Text(
+                    controller.name.text,
+                    style: const TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.badge,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      controller.age.text,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.height,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      controller.height.text,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 50),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Icon(
+                      Icons.monitor_weight,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    Text(
+                      controller.weight.text,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Divider(
+                  color: Colors.black,
+                  thickness: 2,
+                ),
+              ),
             ],
           ),
         ),

@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 // Models
 import 'package:team_muscle/models/user_model.dart';
 import 'package:team_muscle/models/last_connection_model.dart';
+import 'package:team_muscle/widgets/others/loading_widget.dart';
 
 // Tables
 import 'package:team_muscle/database/tables/user_table.dart';
@@ -57,9 +58,18 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
               itemBuilder: (BuildContext context, int index) {
                 return Card(
                   child: ListTile(
-                    title: Text(usersSnapshot.data![index].name),
+                    title: Text(
+                        usersSnapshot.data![index].name,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                        ),
+                    ),
                     trailing: IconButton(
-                      icon: const Icon(Icons.how_to_reg),
+                      icon: const Icon(
+                          Icons.how_to_reg,
+                          color: Colors.black,
+                      ),
                       onPressed: () {
                         globals.userIndex = usersSnapshot.data![index].id;
                         insertLastConnection(LastConnectionModel(
@@ -76,7 +86,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
             ),
           ));
         }
-        return const CircularProgressIndicator();
+        return const LoadingWidget();
       },
     );
   }

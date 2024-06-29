@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:team_muscle/globals.dart' as globals;
 
+// General
+import 'package:team_muscle/pages/generals/login_page.dart';
+import 'package:team_muscle/pages/generals/subscribe_page.dart';
+
 // Users Pages
-import 'package:team_muscle/pages/users/user_page.dart';
-import 'package:team_muscle/pages/users/add_user_page.dart';
-import 'package:team_muscle/pages/users/select_user_page.dart';
 import 'package:team_muscle/pages/users/profile_page.dart';
 import 'package:team_muscle/pages/users/edit_profile_page.dart';
 
@@ -29,25 +30,19 @@ import 'package:team_muscle/controllers/exercise_data_controller.dart';
 import 'package:team_muscle/database/tables/exercise_table.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: '/pages/users/user_page.dart',
+  initialLocation: '/pages/generals/login_page.dart',
   routes: [
     GoRoute(
-        path: '/pages/users/user_page.dart',
-        name: 'user',
+        path: '/pages/generals/login_page.dart',
+        name: 'login',
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: UserPage());
+          return const MaterialPage(child: LoginPage());
         }),
     GoRoute(
-        path: '/pages/users/add_user_page.dart',
-        name: 'add_user',
+        path: '/pages/generals/subscribe_page.dart',
+        name: 'subscribe',
         pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: AddUserPage());
-        }),
-    GoRoute(
-        path: '/pages/users/select_user_page.dart',
-        name: 'select_user',
-        pageBuilder: (BuildContext context, GoRouterState state) {
-          return const MaterialPage(child: SelectUserPage());
+          return const MaterialPage(child: SubscribePage());
         }),
     GoRoute(
         path: '/pages/users/profile_page.dart',
