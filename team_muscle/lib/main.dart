@@ -10,12 +10,12 @@ import 'package:team_muscle/I10n/I10n.dart';
 import 'package:team_muscle/database/tables/last_connection_table.dart';
 
 Future<void> main() async {
-  runApp(const MainApp());
   WidgetsFlutterBinding.ensureInitialized();
   globals.database = database();
   if(await isLastConnectionEmpty() == false) {
     globals.userIndex = await getLastConnection().then((value) => value.userId);
   }
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: true,
       routerConfig: router,
       title: 'Team Muscle',
       supportedLocales: L10n.all,

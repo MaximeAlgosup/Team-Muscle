@@ -6,8 +6,8 @@ import 'package:team_muscle/globals.dart' as globals;
 import 'package:team_muscle/controllers/user_controller.dart';
 
 // Widgets
-import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 import 'package:team_muscle/widgets/navbar_widget.dart';
+import 'package:team_muscle/widgets/others/loading_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -17,20 +17,29 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
-
   final controller = UserController();
+  Widget _body = LoadingWidget();
 
-  @override
-  initState() {
-    super.initState();
-    setState(() {
-      controller.setById(globals.userIndex!);
+  void _setUserData() async {
+    controller.setById(globals.userIndex!).then((value) {
+      setState(() {
+        _body = buildProfilePage(context);
+      });
     });
   }
 
   @override
+  initState() {
+    super.initState();
+    _setUserData();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    return _body;
+  }
+
+  Widget buildProfilePage(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[600],
       body: SafeArea(
@@ -78,18 +87,26 @@ class _ProfilePageState extends State<ProfilePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.badge,
-                      color: Colors.black,
-                      size: 30,
+                    const Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.badge,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                     ),
-                    Text(
-                      controller.age.text,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
+                    Expanded(
+                      flex: 6,
+                      child: Center(
+                        child: Text(
+                          controller.age.text,
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -105,18 +122,26 @@ class _ProfilePageState extends State<ProfilePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.height,
-                      color: Colors.black,
-                      size: 30,
+                    const Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.height,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                     ),
-                    Text(
-                      controller.height.text,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
+                    Expanded(
+                      flex: 6,
+                      child: Center(
+                        child: Text(
+                         "${ controller.height.text} cm",
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -132,18 +157,26 @@ class _ProfilePageState extends State<ProfilePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 50),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.monitor_weight,
-                      color: Colors.black,
-                      size: 30,
+                    const Expanded(
+                      flex: 1,
+                      child: Icon(
+                        Icons.monitor_weight,
+                        color: Colors.black,
+                        size: 40,
+                      ),
                     ),
-                    Text(
-                      controller.weight.text,
-                      style: const TextStyle(
-                        fontSize: 25,
-                        color: Colors.white,
+                    Expanded(
+                      flex: 6,
+                      child: Center(
+                        child: Text(
+                          "${ controller.weight.text} kg",
+                          style: const TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -160,10 +193,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-        bottomNavigationBar: Container(
-          color: Colors.grey[600],
-          child: const NavbarWidget(selectedIndex: 2)
-        ),
+      bottomNavigationBar: Container(
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 2)),
     );
   }
 }

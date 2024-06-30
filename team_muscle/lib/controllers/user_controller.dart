@@ -34,9 +34,10 @@ class UserController {
     weight.text = user.weight.toString();
   }
 
-  void setById(int id) async {
+  Future<bool> setById(int id) async {
     final UserModel user = await findUserById(id);
     setFields(user);
+    return true;
   }
 
   void updateUser(int id) async {
