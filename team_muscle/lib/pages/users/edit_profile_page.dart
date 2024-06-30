@@ -10,6 +10,7 @@ import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
 import 'package:team_muscle/widgets/fields/number_field_widget.dart';
 import 'package:team_muscle/widgets/navbar_widget.dart';
+import 'package:team_muscle/widgets/others/loading_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -20,17 +21,28 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final controller = UserController();
+  Widget _body = const LoadingWidget();
 
-  @override
-  initState() {
-    super.initState();
-    setState(() {
-      controller.setById(globals.userIndex!);
+  void _setUserData() async {
+    controller.setById(globals.userIndex!).then((value) {
+      setState(() {
+        _body = buildUserEditPage(context);
+      });
     });
   }
 
   @override
+  initState() {
+    super.initState();
+    _setUserData();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    return _body;
+  }
+
+  Widget buildUserEditPage(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[600],
       body: SafeArea(
@@ -44,6 +56,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     onPressed: () {
                       context.goNamed("profile");
                     },
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Center(
+                        child: Text(
+                          "Edit ${controller.name.text}'s profile",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -87,7 +119,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
       ),
       bottomNavigationBar: Container(
-          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 0)),
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 2)),
     );
   }
 }

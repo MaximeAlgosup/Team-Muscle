@@ -37,6 +37,26 @@ class _SubscribePageState extends State<SubscribePage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const Row(
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(20.0),
+                      child: Center(
+                        child: Text(
+                          "Add new user",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
               TextFieldWidget(
                 label: 'Name: ',
                 hintText: 'Enter your name',

@@ -61,6 +61,7 @@ class _AddExerciseDataPageState extends State<AddExerciseDataPage> {
                       child: Center(
                         child: Text(
                           "Add new ${_exerciseName.toLowerCase()} record",
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 30,

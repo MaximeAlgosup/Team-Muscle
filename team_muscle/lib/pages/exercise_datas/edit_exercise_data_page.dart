@@ -75,6 +75,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                       child: Center(
                         child: Text(
                           "Edit ${_exerciseName.toLowerCase()} record",
+                          textAlign: TextAlign.center,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 30,
