@@ -38,7 +38,7 @@ class ExerciseDataController {
     userId.dispose();
   }
 
-  void setFields(ExerciseDataModel exerciseData) {
+  Future<bool> setFields(ExerciseDataModel exerciseData) {
     date.text = exerciseData.date.toString();
     weight.text = exerciseData.weight.toString();
     reps.text = exerciseData.reps.toString();
@@ -47,6 +47,7 @@ class ExerciseDataController {
     isPersonalRecord.text = exerciseData.isPersonalRecord.toString();
     exerciseId.text = exerciseData.exerciseId.toString();
     userId.text = exerciseData.userId.toString();
+    return Future.value(true);
   }
 
   ExerciseDataController getExoDataById(int id)  {
@@ -56,10 +57,19 @@ class ExerciseDataController {
   }
 
 
-  void setById(int id) async {
+  Future<bool> setById(int id) async {
     final ExerciseDataModel exerciseData = await findExerciseDataById(id);
     debugPrint(exerciseData.toString());
-    setFields(exerciseData);
+    setFields(exerciseData).then((value) {
+      if(value) {
+        debugPrint('Fields set');
+        return true;
+      } else {
+        debugPrint('Fields not set');
+        return false;
+      }
+    });
+    return true;
   }
 
   void setPersonalRecord(bool isPersonalRecord) {

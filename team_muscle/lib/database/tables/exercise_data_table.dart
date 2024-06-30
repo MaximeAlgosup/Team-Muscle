@@ -31,7 +31,7 @@ Future<ExerciseDataModel> findExerciseDataById(int id) async {
     reps: exerciseDataMaps.first['reps'] as int,
     sets: exerciseDataMaps.first['sets'] as int,
     isPersonalRecord: exerciseDataMaps.first['isPersonalRecord'] == 1,
-    exerciseId: id,
+    exerciseId:  exerciseDataMaps.first['ExerciseId'] as int,
     userId: globals.userIndex!,
   );
 }

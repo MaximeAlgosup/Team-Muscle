@@ -41,9 +41,9 @@ class DateFieldWidget extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(15),
               border: Border.all(
-                color: Colors.black,
+                color: Colors.white,
                 width: 2.5,
               ),
             ),

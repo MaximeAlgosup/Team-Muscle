@@ -72,12 +72,14 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Edit ${_exerciseName.toLowerCase()} record",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                      child: Center(
+                        child: Text(
+                          "Edit ${_exerciseName.toLowerCase()} record",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
@@ -132,14 +134,15 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SimpleButtonWidget(
-                    label: "Save record",
+                    label: "Save",
                     onPressed: () {
                       _exerciseDataController
                           .setPersonalRecord(_isPersonalRecord);
                       _exerciseDataController
                           .updateExerciseData(_exerciseDataId);
                       context.goNamed('exercise_data', queryParameters: {
-                        'exerciseDataId': _exerciseDataId.toString()
+                        'exerciseDataId': _exerciseDataId.toString(),
+                        'exerciseName': _exerciseName,
                       });
                     },
                   ),
@@ -149,7 +152,7 @@ class _EditExerciseDataPageState extends State<EditExerciseDataPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SimpleButtonWidget(
-                    label: "Delete record",
+                    label: "Delete",
                     isWarning: true,
                     onPressed: () {
                       _exerciseDataController

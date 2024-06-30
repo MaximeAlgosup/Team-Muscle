@@ -8,6 +8,7 @@ import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_data_controller.dart';
+import 'package:team_muscle/widgets/navbar_widget.dart';
 
 class AddExerciseDataPage extends StatefulWidget {
   const AddExerciseDataPage(
@@ -57,14 +58,16 @@ class _AddExerciseDataPageState extends State<AddExerciseDataPage> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
-                      child: Text(
-                        "Add new ${_exerciseName.toLowerCase()} record",
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
+                      child: Center(
+                        child: Text(
+                          "Add new ${_exerciseName.toLowerCase()} record",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
+                      )
                     ),
                   ),
                 ],
@@ -117,7 +120,7 @@ class _AddExerciseDataPageState extends State<AddExerciseDataPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButtonWidget(
-                    label: "Add record",
+                    label: "Add Record",
                     onPressed: () {
                       _exerciseDataController
                           .setPersonalRecord(isPersonalRecord);
@@ -134,6 +137,8 @@ class _AddExerciseDataPageState extends State<AddExerciseDataPage> {
           ),
         ),
       ),
+      bottomNavigationBar: Container(
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 0)),
     );
   }
 }

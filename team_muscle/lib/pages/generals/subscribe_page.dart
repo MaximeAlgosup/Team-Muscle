@@ -7,15 +7,9 @@ import 'package:team_muscle/controllers/user_controller.dart';
 
 // Widgets
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
-import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
+import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 import 'package:team_muscle/widgets/buttons/back_app_bar_widget.dart';
 import 'package:team_muscle/widgets/fields/number_field_widget.dart';
-
-// Models
-import 'package:team_muscle/models/user_model.dart';
-
-// Tables
-import 'package:team_muscle/database/tables/user_table.dart';
 
 class SubscribePage extends StatefulWidget {
   const SubscribePage({super.key});
@@ -63,12 +57,13 @@ class _SubscribePageState extends State<SubscribePage> {
                 hintText: 'Enter your weight in kg',
                 controller: controller.weight,
               ),
-              SimpleButtonWidget(
-                label: 'Save User',
+              IconButtonWidget(
+                label: 'Add User',
                 onPressed: () {
                   controller.saveUser();
                   context.goNamed("login");
                 },
+                icon: Icons.add,
               ),
             ],
           ),

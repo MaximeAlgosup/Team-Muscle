@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Widgets
-import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
 import 'package:team_muscle/widgets/fields/text_area_widget.dart';
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
+import 'package:team_muscle/widgets/buttons/icon_button_widget.dart';
 
 // Controllers
 import 'package:team_muscle/controllers/exercise_controller.dart';
@@ -48,12 +48,13 @@ class AddExercisePage extends StatelessWidget {
                       hintText: 'Enter the exercise description',
                       controller: controller.description,
                     ),
-                    SimpleButtonWidget(
-                      label: 'Save',
+                    IconButtonWidget(
+                      label: 'Add Exercise',
                       onPressed: () {
                         controller.saveExercise();
                         context.goNamed('exercise_list');
                       },
+                      icon: Icons.add,
                     ),
                   ],
                 ),

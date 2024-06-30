@@ -3,6 +3,8 @@ import "package:go_router/go_router.dart";
 
 // Controllers
 import "package:team_muscle/controllers/exercise_data_controller.dart";
+import "package:team_muscle/widgets/navbar_widget.dart";
+import "package:team_muscle/widgets/others/loading_widget.dart";
 
 // Widgets
 import "package:team_muscle/widgets/panels/double_data_panel_widget.dart";
@@ -36,18 +38,27 @@ class _ExerciseDataPageState extends State<ExerciseDataPage> {
   final int exerciseDataId;
   final String exerciseName;
   final ExerciseDataController controller;
+  Widget _body = const LoadingWidget();
+  void _setExerciseData() async {
+    controller.setById(exerciseDataId).then((value) {
+      setState(() {
+        _body = buildExerciseDataPage(context);
+      });
+    });
+  }
 
   @override
   initState() {
-    setState(() {
-      controller.setById(exerciseDataId);
-    });
     super.initState();
-    debugPrint("Passe");
+    _setExerciseData();
   }
 
   @override
   Widget build(BuildContext context) {
+    return _body;
+  }
+
+  Widget buildExerciseDataPage(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[600],
       body: SafeArea(
@@ -154,8 +165,11 @@ class _ExerciseDataPageState extends State<ExerciseDataPage> {
               ),
             ),
           ],
-        )),
+        ),
+        ),
       ),
+      bottomNavigationBar: Container(
+        color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 0)),
     );
   }
 }

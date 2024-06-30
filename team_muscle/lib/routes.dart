@@ -135,7 +135,8 @@ final GoRouter router = GoRouter(
           if (exerciseDataId == null) {
             return const MaterialPage(child: ExerciseListPage());
           }
-          ExerciseDataController exerciseDataController = ExerciseDataController().getExoDataById(int.parse(exerciseDataId));
+          ExerciseDataController exerciseDataController = ExerciseDataController();
+          exerciseDataController.setBaseData(exerciseDataId, globals.userIndex!.toString());
           return MaterialPage(
               child: ExerciseDataPage(
                   exerciseDataId: int.parse(exerciseDataId),

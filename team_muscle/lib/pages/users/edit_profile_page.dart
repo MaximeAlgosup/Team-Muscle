@@ -68,14 +68,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 controller: controller.weight,
               ),
               SimpleButtonWidget(
-                  label: 'Save data',
+                  label: 'Save',
                   onPressed: () {
                     controller.updateUser(globals.userIndex!);
                     context.goNamed("profile");
                   }
               ),
               SimpleButtonWidget(
-                label: 'Delete user',
+                label: 'Delete',
                 isWarning: true,
                 onPressed: () {
                   controller.deleteUser();
