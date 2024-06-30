@@ -22,14 +22,23 @@ class ExerciseController {
     description.dispose();
   }
 
-  void setFields(ExerciseModel exercise) {
+  Future<bool> setFields(ExerciseModel exercise) {
     name.text = exercise.name;
     description.text = exercise.description;
+    return Future.value(true);
   }
 
-  void setById(int id) async {
+  Future<bool> setById(int id) async {
     final ExerciseModel exercise = await findExerciseById(id);
-    setFields(exercise);
+    setFields(exercise).then((value) {
+      if (value) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    });
+    return true;
   }
 
   void updateExercise(int id) async {

@@ -55,24 +55,24 @@ class TextAreaWidget extends StatelessWidget {
                     ),
                     focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 2.5,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 2.5,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                     disabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Colors.black,
+                        color: Colors.white,
                         width: 2.5,
                       ),
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                     ),
                   ),
                 ),

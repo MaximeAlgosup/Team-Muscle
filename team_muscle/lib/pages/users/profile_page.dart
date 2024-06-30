@@ -18,7 +18,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final controller = UserController();
-  Widget _body = LoadingWidget();
+  Widget _body = const LoadingWidget();
 
   void _setUserData() async {
     controller.setById(globals.userIndex!).then((value) {

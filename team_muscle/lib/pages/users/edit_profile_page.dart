@@ -87,7 +87,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
       ),
       bottomNavigationBar: Container(
-          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 2)),
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 0)),
     );
   }
 }

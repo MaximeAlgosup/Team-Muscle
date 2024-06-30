@@ -9,6 +9,7 @@ import 'package:team_muscle/controllers/exercise_controller.dart';
 import 'package:team_muscle/widgets/fields/text_area_widget.dart';
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
+import 'package:team_muscle/widgets/navbar_widget.dart';
 
 class EditExercisePage extends StatelessWidget {
   const EditExercisePage({
@@ -75,6 +76,8 @@ class EditExercisePage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: Container(
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 0)),
     );
   }
 }

@@ -69,7 +69,7 @@ class _SelectExerciseRecordWidgetState
                 itemCount: exerciseDataSnapshot.data!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
-                    color: (exerciseDataSnapshot.data![index].isPersonalRecord == true)? Colors.green : Colors.white,
+                    color: (exerciseDataSnapshot.data![index].isPersonalRecord == true)? Colors.lightGreen : Colors.white,
                     child: ListTile(
                       title:
                       Text("${exerciseDataSnapshot.data![index].date.toString().split(' ')[0].replaceAll("-", "/")} - ${exerciseDataSnapshot.data![index].weight} kg"),

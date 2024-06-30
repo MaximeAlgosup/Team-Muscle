@@ -77,7 +77,6 @@ final GoRouter router = GoRouter(
             return const MaterialPage(child: ExerciseListPage());
           }
           ExerciseController exerciseController = ExerciseController();
-          exerciseController.setById(int.parse(exerciseId));
           return MaterialPage(
               child: ExercisePage(
                   exerciseController: exerciseController,
