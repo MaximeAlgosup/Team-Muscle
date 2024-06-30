@@ -22,12 +22,7 @@ class SelectUserWidget extends StatefulWidget {
 class _SelectUserWidgetState extends State<SelectUserWidget> {
   Future<List<UserModel>> getUsers() async {
     List<UserModel> usersList = await users();
-    // print all users data
-    if (kDebugMode) {
-      for (int i = 0; i < usersList.length; i++) {
-        debugPrint("User: ${usersList[i].toString()}");
-      }
-    }
+
     return usersList;
   }
 
@@ -46,12 +41,13 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
       builder:
           (BuildContext context, AsyncSnapshot<List<UserModel>> usersSnapshot) {
         if (usersSnapshot.hasData) {
-          return Expanded(
-              child: RefreshIndicator(
+          return RefreshIndicator(
             onRefresh: () async {
-              setState(() {
-                usersList = getUsers();
-              });
+              setState(
+                () {
+                  usersList = getUsers();
+                },
+              );
             },
             child: ListView.builder(
               itemCount: usersSnapshot.data!.length,
@@ -59,24 +55,26 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                 return Card(
                   child: ListTile(
                     title: Text(
-                        usersSnapshot.data![index].name,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                        ),
+                      usersSnapshot.data![index].name,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
                     ),
                     trailing: IconButton(
                       icon: const Icon(
-                          Icons.how_to_reg,
-                          color: Colors.black,
+                        Icons.how_to_reg,
+                        color: Colors.black,
                       ),
                       onPressed: () {
                         globals.userIndex = usersSnapshot.data![index].id;
-                        insertLastConnection(LastConnectionModel(
-                          id: 1,
-                          userId: usersSnapshot.data![index].id,
-                          date: DateTime.now(),
-                        ));
+                        insertLastConnection(
+                          LastConnectionModel(
+                            id: 1,
+                            userId: usersSnapshot.data![index].id,
+                            date: DateTime.now(),
+                          ),
+                        );
                         context.goNamed("profile");
                       },
                     ),
@@ -84,7 +82,7 @@ class _SelectUserWidgetState extends State<SelectUserWidget> {
                 );
               },
             ),
-          ));
+          );
         }
         return const LoadingWidget();
       },

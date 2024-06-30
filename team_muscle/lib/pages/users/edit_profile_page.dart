@@ -9,6 +9,7 @@ import 'package:team_muscle/controllers/user_controller.dart';
 import 'package:team_muscle/widgets/fields/text_field_widget.dart';
 import 'package:team_muscle/widgets/buttons/simple_button_widget.dart';
 import 'package:team_muscle/widgets/fields/number_field_widget.dart';
+import 'package:team_muscle/widgets/navbar_widget.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({super.key});
@@ -85,6 +86,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
         ),
       ),
+      bottomNavigationBar: Container(
+          color: Colors.grey[600], child: const NavbarWidget(selectedIndex: 2)),
     );
   }
 }

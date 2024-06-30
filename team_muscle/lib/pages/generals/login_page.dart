@@ -47,7 +47,10 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               (isUsers() == false) ?
               const Text("No users found, please add a new user") :
-              const SelectUserWidget(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.7,
+                child: const SelectUserWidget(),
+              ),
               IconButtonWidget(
                 label: 'Add User',
                 icon: Icons.add,
