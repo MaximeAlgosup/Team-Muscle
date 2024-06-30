@@ -52,22 +52,25 @@ class _NavbarWidgetState extends State<NavbarWidget> {
           canvasColor: Colors.grey[800],
         ),
         child: BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.fitness_center),
+              icon: Icon(Icons.fitness_center, size: 40),
               label: 'Exercises',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.accessibility_new),
+              icon: Icon(Icons.accessibility_new, size: 40),
               label: 'Body data',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
+              icon: Icon(Icons.account_circle, size: 40),
               label: 'Profile',
             ),
           ],
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.amber[800],
+          unselectedItemColor: Colors.black,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           onTap: _onItemTapped,
         ),
